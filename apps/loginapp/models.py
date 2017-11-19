@@ -35,8 +35,6 @@ class UserManager(models.Manager):
         elif postdata['pwd'] != postdata['confpwd']:
             error.append("Passwords do not match!")
         if len(errors)==0:
-            
-         # update create to include all fields from form
             hashed = bcrypt.hashpw(postdata['pwd'].encode(), bcrypt.gensalt())
             user = User.objects.create(fname=postdata['fname'], lname=postdata['lname'], email=postdata['email'], password = hashed)
             return (True, user)
